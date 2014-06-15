@@ -1,5 +1,6 @@
 ### OLD-TESTING
 outcome_tmp <- read.csv("rprog_data_ProgAssignment3-data/outcome-of-care-measures.csv", colClasses="character")
+outcome_tmp$Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack
 length(outcome_tmp$Hospital.Name[outcome_tmp$State == "TX"])
 
 a <- outcome_tmp$Hospital.Name[outcome_tmp$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia == min(outcome_tmp$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia, na.rm=TRUE)]

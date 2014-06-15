@@ -4,11 +4,27 @@ setwd("/home/andre/Documents/curso/coursera_project/Programming Assignment 3-Hos
 #### BEST
 ####
         source("best.R")
+        # Debugging
+        debug(best("TX", "heart attack"))
+        debug(best("MD", "pneumonia"))
+        
+        # Running
+        print(best("TX", "heart attack"))
+        print(best("MD", "pneumonia"))
+        print(best("NY", "pneumonia"))
+
+####
+#### SUBMIT :: source("submitscript1.R")
+####
+        library(RCurl)
+        require(RCurl)
+        source("rprog_scripts_submitscript3.R")
+        submit(resetLogin=TRUE, manual=TRUE)
 
 ####
 #### TESTING
 ####
-        a <- best("NY", "pneumonia")
+        best("NY", "pneumonia")
         best("TX","pneumonia")
         best("TX", "heart attack")
         best("TX", "heart failure")
@@ -19,10 +35,5 @@ setwd("/home/andre/Documents/curso/coursera_project/Programming Assignment 3-Hos
         best("BB", "heart attack")
         best("NY", "hert attack")
 
-####
-#### SUBMIT :: source("submitscript1.R")
-####
-        library(RCurl)
-        require(RCurl)
-        source("rprog_scripts_submitscript3.R")
-        submit(resetLogin=TRUE, manual=TRUE)
+a <- c("0.1", "1.1", "1.2")
+min(a)

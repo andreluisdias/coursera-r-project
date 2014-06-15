@@ -1,7 +1,11 @@
 setwd("/home/andre/Documents/curso/coursera_project/Programming Assignment 3-Hospital Quality")
+source("validateState.R")
+source("validateOutcome.R")
+source("hospital_pneumonia.R")
+source("hospital_heartattack.R")
 best <- function(state, outcome) {
         
-        resultado.df <- NA
+        hospital.name <- NA
         
         ## Read outcome data
         outcome_csv <- read.csv("rprog_data_ProgAssignment3-data/outcome-of-care-measures.csv", colClasses="character")
@@ -9,45 +13,32 @@ best <- function(state, outcome) {
         ##
         ## Check that state and outcome are valid
         ##
-        
         ## 01 - TYPES
-                if(!is.character(state)) {
-                        stop("invalid state")
-                }
-                
-                if(!is.character(outcome)) {
-                        stop("invalid outcome")
-                }
+        if(!is.character(state)) {
+                stop("invalid state")
+        }
         
         #02 - CONTENT
-                if (length(outcome_csv$Hospital.Name[outcome_csv$State == state]) == 0) {
-                        stop("invalid state")
-                }
+        if (length(outcome_csv$Hospital.Name[outcome_csv$State == state]) == 0) {
+                stop("invalid state")
+        }
         
-                outcomes <- c("heart attack", "pneumonia", "heart failure")
-                if (is.na(match(outcome, outcomes))) {
-                        stop("invalid outcome")
-                }
+        
+        validateOutcome(outcome, outcome_csv)
         
         ## Return hospital name in that state with lowest 30-day death rate
         if (outcome == "pneumonia") {
-
-                #
-                # a <- outcome_csv$Hospital.Name[outcome_csv$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia == min(outcome_tmp$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia, na.rm=TRUE)]
-                # b <- outcome_csv$State[outcome_csv$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia == min(outcome_tmp$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia, na.rm=TRUE)]
-                # result <- data.frame(cbind(a, b))
-                # result.ordered <- novo[order(novo$State, novo$Hospital), 1:2]
-                # resultado <- result.ordered$Hospital[result.ordered$State == state]
-                
-                a <- outcome_csv$Hospital.Name[outcome_csv$State == state]
-                b <- outcome_csv$State[outcome_csv$State == state]
-                c <- outcome_csv$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia[outcome_csv$State == state]
-                
-                resultado.df <- data.frame(cbind(a, b, c))
-                names(resultado.df) <- c("Hospital", "State", "Rate")
+                hospital.name <- hospital_pneumonia(state, outcome_csv)
         }
         
-        #df.resultado <- data.frame(resultado)
-        #head(resultado, 1)
-        resultado.df
+        if (outcome == "heart attack") {
+                hospital.name <- hospital_heartattack(state, outcome_csv)
+        }
+        
+
+        if (length(hospital.name) == 0) {
+                hospital.name <- "UNDEFINED"
+        }
+        
+        hospital.name
 }
