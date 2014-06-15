@@ -16,6 +16,12 @@ setwd("/home/andre/Documents/curso/coursera_project")
         print(complete("specdata", 3))
 
 ####
+#### CORRELATION :: source("corr.R")
+####
+        source("corr.R")
+
+
+####
 #### SUBMIT :: source("submitscript1.R")
 ####
         library(RCurl)
