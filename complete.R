@@ -1,6 +1,6 @@
 complete <- function(directory, id = 1:332) {
         
-        mainMatrix <- NA 
+        mainDataFrame <- NA
         
         ## 'id' is an integer vector indicating the monitor ID numbers
         ## to be used
@@ -14,10 +14,21 @@ complete <- function(directory, id = 1:332) {
                 
                 csvLoaded <- read.csv(theFile)
                 
-                if (is.na(mainMatrix)) {
-                        mainMatrix <- csvLoaded
+                # DATAFRAME FILTERED
+                csvLoaded <- data.frame(csvLoaded)
+                a <- csvLoaded$ID[!is.na(csvLoaded$sulfate) & !is.na(csvLoaded$nitrate)]
+                a <- data.frame(a)
+                
+                b <- cbind(i, nrow(a))
+                b <- data.frame(b)
+                names(b) <- c("id", "nobs")
+                
+                if (!is.data.frame(mainDataFrame)) {
+                      mainDataFrame <- b
+                      mainDataFrame <- data.frame(mainDataFrame)
+                      names(mainDataFrame) <- c("id", "nobs")
                 } else {
-                        mainMatrix <- rbind(mainMatrix, csvLoaded)
+                        mainDataFrame <- rbind(mainDataFrame, data.frame(b))
                 }
         }        
 
@@ -28,6 +39,6 @@ complete <- function(directory, id = 1:332) {
         ## ...
         ## where 'id' is the monitor ID number and 'nobs' is the
         ## number of complete cases
-        
-        mainMatrix
+        #data.frame(mainDataFrame)
+        mainDataFrame
 }
