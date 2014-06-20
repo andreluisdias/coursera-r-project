@@ -12,7 +12,7 @@ best <- function(state, outcome) {
         outcome_csv <- read.csv("rprog_data_ProgAssignment3-data/outcome-of-care-measures.csv", colClasses="character")
         
         validateState(state, outcome_csv)
-        validateOutcome(outcome, outcome_csv)
+        validateOutcome(outcome)
         
         ## Return hospital name in that state with lowest 30-day death rate
         if (outcome == "pneumonia") {

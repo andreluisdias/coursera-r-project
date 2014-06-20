@@ -1,4 +1,4 @@
-validateOutcome <- function(outcome, outcome_csv) {
+validateOutcome <- function(outcome) {
 
         ## 01 - TYPES
         if(!is.character(outcome)) {
