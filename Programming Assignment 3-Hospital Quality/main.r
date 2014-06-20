@@ -4,14 +4,15 @@ setwd("/home/andre/Documents/curso/coursera_project/Programming Assignment 3-Hos
 #### BEST
 ####
         source("best.R")
-        # Debugging
-        debug(best("TX", "heart attack"))
-        debug(best("MD", "pneumonia"))
         
         # Running
-        print(best("TX", "heart attack"))
-        print(best("MD", "pneumonia"))
-        print(best("NY", "pneumonia"))
+        best("TX", "heart attack") # OK [1] "CYPRESS FAIRBANKS MEDICAL CENTER" #OK
+        best("MD", "heart attack") # OK [1] "JOHNS HOPKINS HOSPITAL, THE" #OK
+        best("MD", "pneumonia") # OK [1] "GREATER BALTIMORE MEDICAL CENTER"
+        best("TX", "heart failure") # [1] "FORT DUNCAN MEDICAL CENTER"
+        best("BB", "heart attack") # OK Error in best("BB", "heart attack") : invalid state
+        best("NY", "hert attack") # OK Error in best("NY", "hert attack") : invalid outcome
+        
 
 ####
 #### SUBMIT :: source("submitscript1.R")
@@ -20,20 +21,3 @@ setwd("/home/andre/Documents/curso/coursera_project/Programming Assignment 3-Hos
         require(RCurl)
         source("rprog_scripts_submitscript3.R")
         submit(resetLogin=TRUE, manual=TRUE)
-
-####
-#### TESTING
-####
-        best("NY", "pneumonia")
-        best("TX","pneumonia")
-        best("TX", "heart attack")
-        best("TX", "heart failure")
-        best("MD", "heart attack")
-        best("MD", "pneumonia")
-        
-        ## Errors
-        best("BB", "heart attack")
-        best("NY", "hert attack")
-
-a <- c("0.1", "1.1", "1.2")
-min(a)

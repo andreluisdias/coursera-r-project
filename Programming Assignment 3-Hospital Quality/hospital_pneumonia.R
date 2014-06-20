@@ -1,17 +1,9 @@
+source("hospital_pneumonia_df.R")
 hospital_pneumonia <- function(state, outcome_csv) {
 
-        hospital.df <- "---"
-        
-        ## Return hospital name in that state with lowest 30-day death rate
-        a <- outcome_csv$Hospital.Name[outcome_csv$State == state & outcome_csv$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia != "Not Available"]
-        b <- outcome_csv$State[outcome_csv$State == state & outcome_csv$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia != "Not Available"]
-        c <- as.character(outcome_csv$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia[outcome_csv$State == state & outcome_csv$Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia != "Not Available"])
-        d <- min(c)
-        
-        hospital.df <- data.frame(cbind(a, b, c), stringsAsFactors=FALSE)
-        names(hospital.df) <- c("Hospital", "State", "Rate")
+        hospital.df <- hospital_pneumonia_df(state, outcome_csv)
 
-        e <- hospital.df$Hospital[hospital.df$Rate == d]
+        e <- hospital.df$Hospital[hospital.df$Rate == min(as.numeric(hospital.df$Rate))]
         if (length(e) > 1) {
                 sort(e)
                 e <- e[1]
